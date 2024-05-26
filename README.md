@@ -14,7 +14,7 @@ Using GM_config to store your settings.
 
 Currently only Blu and Aither are supported.
 
-[INSTALL](https://github.com/frenchcutgreenbean/UNIT3D-IS-COOL/raw/main/cool-unit3d-features.user.js)
+[INSTALL](https://github.com/frenchcutgreenbean/UNIT3D-IS-COOL/raw/main/cool-features.user.js)
 
 ## Individual Scripts
 
