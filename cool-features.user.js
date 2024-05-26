@@ -8,8 +8,8 @@
 // @author       dantayy
 // @require      https://cdn.jsdelivr.net/gh/sizzlemctwizzle/GM_config@43fd0fe4de1166f343883511e53546e87840aeaf/gm_config.js
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=unit3d.dev
-// @updateURL    https://github.com/frenchcutgreenbean/UNIT3D-IS-COOL/raw/main/cool-unit3d-features.user.js
-// @downloadURL  https://github.com/frenchcutgreenbean/UNIT3D-IS-COOL/raw/main/cool-unit3d-features.user.js
+// @updateURL    https://github.com/frenchcutgreenbean/UNIT3D-IS-COOL/raw/main/cool-features.user.js
+// @downloadURL  https://github.com/frenchcutgreenbean/UNIT3D-IS-COOL/raw/main/cool-features.user.js
 // @grant        GM.xmlHttpRequest
 // @grant        GM.getValue
 // @grant        GM.setValue
