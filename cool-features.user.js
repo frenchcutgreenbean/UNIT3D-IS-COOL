@@ -381,7 +381,6 @@
             const input = checkbox.querySelector(".form__checkbox")
             resolutionKeys[input.value] = label.innerText.trim()
         })
-    
         console.log(resolutionKeys)
         ---------------------------------------------------------------
         */
@@ -584,12 +583,13 @@
                     return { id: tvdbid.trim(), type: 'tv' };
                 }
             }
-
             if (match) {
                 if (site === 'tmdb' && link.includes('tv')) {
                     return { id: match[1], type: 'tv' };
+                } else if (site === 'tmdb' && link.includes('movie')) {
+                    return { id: match[1], type: 'movie' };
                 }
-                return { id: match[1], type: false };
+                return { id: match[1], type: 'movie' };
             }
             return { id: null, type: null }; // Ensure return even if no match
         }
@@ -598,14 +598,21 @@
             searchForm.value = "";
             const { id, type } = await parseInputs(site, title);
             const tvCheckbox = document.querySelector('input[value="2"][wire\\:model\\.live="categories"]');
-            console.log(id); // Check if the id is correctly destructured
+            const movieCheckbox = document.querySelector('input[value="1"][wire\\:model\\.live="categories"]');
 
-            if (type) {
+            if (type === 'tv') {
                 tvCheckbox.checked = true;
+                movieCheckbox.checked = false;
                 tvCheckbox.dispatchEvent(new Event('change', { bubbles: true }));
-            } else {
+                movieCheckbox.dispatchEvent(new Event('change', { bubbles: true }));
+            } else if (type === 'movie') {
                 tvCheckbox.checked = false;
+                movieCheckbox.checked = true;
                 tvCheckbox.dispatchEvent(new Event('change', { bubbles: true }));
+                movieCheckbox.dispatchEvent(new Event('change', { bubbles: true }));
+            } else {
+                console.log('Error: Something went wrong')
+                return
             }
 
             // Reset all form fields
