@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Search-by-Links
-// @version      0.2
+// @version      0.3
 // @description  SFA LESS CLICKING | Search by meta provider links.
 // @namespace    https://github.com/frenchcutgreenbean/UNIT3D-IS-COOL/
 // @author       dantayy
@@ -160,6 +160,7 @@
       setFields(site, title);
     }
   }
-
-  searchForm.addEventListener("input", handleInputChange);
+  if (searchForm) {
+    searchForm.addEventListener("input", handleInputChange);
+  }
 })();

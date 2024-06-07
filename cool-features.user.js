@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Cool-UNIT3D-Features
-// @version      0.3
+// @version      0.4
 // @description  Adds quality of life features to UNIT3D trackers
 // @match        https://blutopia.cc/*
 // @match        https://aither.cc/*
@@ -813,6 +813,8 @@
       }
     }
 
-    searchForm.addEventListener("input", handleInputChange);
+    if (searchForm) {
+      searchForm.addEventListener("input", handleInputChange);
+    }
   }
 })();
