@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Cool-UNIT3D-Features
-// @version      0.2
+// @version      0.3
 // @description  Adds quality of life features to UNIT3D trackers
 // @match        https://blutopia.cc/*
 // @match        https://aither.cc/*
@@ -306,7 +306,7 @@
 
     function getIMDBID() {
       let a = document.querySelector('[href*="://www.imdb.com/title/tt"]');
-      if(!a) return
+      if (!a) return;
       let id = a.href.match(/tt\d+/)[0];
       let metaDiv = document.querySelector(".meta__ids");
       if (id) {
@@ -742,7 +742,7 @@
         } else if (site === "tmdb" && link.includes("movie")) {
           return { id: match[1], type: "movie" };
         }
-        return { id: match[1], type: "movie" };
+        return { id: match[1], type: false };
       }
       return { id: null, type: null }; // Ensure return even if no match
     }
@@ -765,6 +765,11 @@
       } else if (type === "movie") {
         tvCheckbox.checked = false;
         movieCheckbox.checked = true;
+        tvCheckbox.dispatchEvent(new Event("change", { bubbles: true }));
+        movieCheckbox.dispatchEvent(new Event("change", { bubbles: true }));
+      } else if (type === false) {
+        tvCheckbox.checked = false;
+        movieCheckbox.checked = false;
         tvCheckbox.dispatchEvent(new Event("change", { bubbles: true }));
         movieCheckbox.dispatchEvent(new Event("change", { bubbles: true }));
       } else {

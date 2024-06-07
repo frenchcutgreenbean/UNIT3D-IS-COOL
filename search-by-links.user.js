@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name         Search-by-Links
-// @version      0.1
+// @version      0.2
 // @description  SFA LESS CLICKING | Search by meta provider links.
 // @namespace    https://github.com/frenchcutgreenbean/UNIT3D-IS-COOL/
 // @author       dantayy
-// @match        *://*/torrents?view*
+// @match        *://*/torrents*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=unit3d.dev
 // @updateURL    https://github.com/frenchcutgreenbean/UNIT3D-IS-COOL/raw/main/search-by-links.user.js
 // @downloadURL  https://github.com/frenchcutgreenbean/UNIT3D-IS-COOL/raw/main/search-by-links.user.js
@@ -90,7 +90,7 @@
       } else if (site === "tmdb" && link.includes("movie")) {
         return { id: match[1], type: "movie" };
       }
-      return { id: match[1], type: "movie" };
+      return { id: match[1], type: false };
     }
     return { id: null, type: null }; // Ensure return even if no match
   }
@@ -113,6 +113,11 @@
     } else if (type === "movie") {
       tvCheckbox.checked = false;
       movieCheckbox.checked = true;
+      tvCheckbox.dispatchEvent(new Event("change", { bubbles: true }));
+      movieCheckbox.dispatchEvent(new Event("change", { bubbles: true }));
+    } else if (type === false) {
+      tvCheckbox.checked = false;
+      movieCheckbox.checked = false;
       tvCheckbox.dispatchEvent(new Event("change", { bubbles: true }));
       movieCheckbox.dispatchEvent(new Event("change", { bubbles: true }));
     } else {
