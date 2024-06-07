@@ -306,6 +306,7 @@
 
     function getIMDBID() {
       let a = document.querySelector('[href*="://www.imdb.com/title/tt"]');
+      if(!a) return
       let id = a.href.match(/tt\d+/)[0];
       let metaDiv = document.querySelector(".meta__ids");
       if (id) {
