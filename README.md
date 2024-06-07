@@ -18,6 +18,10 @@ Currently only Blu and Aither are supported.
 
 ## Individual Scripts
 
+### Add-Letterboxd-Link
+- Any UNIT3D tracker should work.
+- [INSTALL](https://github.com/frenchcutgreenbean/UNIT3D-IS-COOL/raw/main/add-letterboxd-link.user.js)
+
 ### Autofill-Request-ids
 - Any UNIT3D tracker should work.
 - [INSTALL](https://github.com/frenchcutgreenbean/UNIT3D-IS-COOL/raw/main/autofill-request-ids.user.js)
