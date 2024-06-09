@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Add-Letterboxd-Ratings
-// @version      0.1
+// @version      0.2
 // @description  Add Letterboxd Ratings to the torrent page.
 // @match        *://*/torrents/*
 // @match        *://*/requests/*
@@ -11,11 +11,16 @@
 // @updateURL    https://github.com/frenchcutgreenbean/UNIT3D-IS-COOL/raw/main/add-letterboxd-ratings.user.js
 // @downloadURL  https://github.com/frenchcutgreenbean/UNIT3D-IS-COOL/raw/main/add-letterboxd-ratings.user.js
 // @grant        GM.xmlHttpRequest
-// @grant        GM.addStyle
 // ==/UserScript==
 
 (function () {
   "use strict";
+
+  function addStyle(css) {
+    const style = document.createElement("style");
+    style.textContent = css;
+    document.head.appendChild(style);
+  }
 
   function getIMDBID() {
     let a = document.querySelector('[href*="://www.imdb.com/title/tt"]');
@@ -53,7 +58,7 @@
     const lbIcon = document.createElement("img");
     lbIcon.className = "letterboxd-chip__icon";
     lbIcon.src = lbLogo;
-    
+
     const iconStyle = `
     .letterboxd-chip__icon{
         grid-area: image;
@@ -82,7 +87,7 @@
     meta_id_tag.append(ratingName);
     meta_id_tag.append(ratingValue);
     articleElement.prepend(meta_id_tag);
-    GM.addStyle(iconStyle);
+    addStyle(iconStyle);
   }
 
   function fetchLetterboxd(id) {
