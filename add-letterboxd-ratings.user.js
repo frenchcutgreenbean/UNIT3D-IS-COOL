@@ -33,6 +33,10 @@
   }
 
   function injectLetterboxd(url, lbRating, lbCount) {
+    if (!lbCount || !lbRating) return;
+    const ratingHeader = getElementByInnerText("h2", "Rating");
+    if (!ratingHeader) return;
+
     const ratingFloat = parseFloat(lbRating);
 
     // Dynamic shadow color based on ratings.
@@ -49,6 +53,7 @@
     const lbIcon = document.createElement("img");
     lbIcon.className = "letterboxd-chip__icon";
     lbIcon.src = lbLogo;
+    
     const iconStyle = `
     .letterboxd-chip__icon{
         grid-area: image;
@@ -62,29 +67,22 @@
         filter: drop-shadow(0 0 0.4rem ${shadowColor});
     }`;
 
-    const ratingHeader = getElementByInnerText("h2", "Rating");
-    if (ratingHeader) {
-      const articleElement = ratingHeader.closest("section");
-      const ratingName = document.createElement("h2");
-      const ratingValue = document.createElement("h3");
-      if (ratingValue) {
-        const meta_id_tag = document.createElement("a");
-        meta_id_tag.className = "meta-chip";
-        ratingName.className = "meta-chip__name";
-        ratingValue.className = "meta-chip__value";
-        meta_id_tag.href = url;
-        meta_id_tag.target = "_blank";
-        meta_id_tag.append(lbIcon);
-        ratingName.innerText = "Letterboxd";
-        ratingValue.innerText = `${lbRating} / ${lbCount} Votes`;
-        meta_id_tag.append(ratingName);
-        meta_id_tag.append(ratingValue);
-        articleElement.prepend(meta_id_tag);
-        GM.addStyle(iconStyle);
-      }
-    } else {
-      console.log("Rating header not found.");
-    }
+    const articleElement = ratingHeader.closest("section");
+    const ratingName = document.createElement("h2");
+    const ratingValue = document.createElement("h3");
+    const meta_id_tag = document.createElement("a");
+    meta_id_tag.className = "meta-chip";
+    ratingName.className = "meta-chip__name";
+    ratingValue.className = "meta-chip__value";
+    meta_id_tag.href = url;
+    meta_id_tag.target = "_blank";
+    meta_id_tag.append(lbIcon);
+    ratingName.innerText = "Letterboxd";
+    ratingValue.innerText = `${lbRating} / ${lbCount} Votes`;
+    meta_id_tag.append(ratingName);
+    meta_id_tag.append(ratingValue);
+    articleElement.prepend(meta_id_tag);
+    GM.addStyle(iconStyle);
   }
 
   function fetchLetterboxd(id) {
