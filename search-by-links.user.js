@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Search-by-Links
-// @version      0.3
+// @version      0.4
 // @description  SFA LESS CLICKING | Search by meta provider links.
 // @namespace    https://github.com/frenchcutgreenbean/UNIT3D-IS-COOL/
 // @author       dantayy
@@ -12,6 +12,8 @@
 // ==/UserScript==
 
 /* Tested on Blu and Aither. Sites with categories different from 1 = Movie 2 = TV will probably not work properly */
+
+// 0.4 fixed checkbox selectors.
 
 /*jshint esversion: 6 */
 (function () {
@@ -99,10 +101,10 @@
     searchForm.value = "";
     const { id, type } = await parseInputs(site, title);
     const tvCheckbox = document.querySelector(
-      'input[value="2"][wire\\:model\\.live="categories"]'
+      'input[value="2"][wire\\:model\\.live="categoryIds"]'
     );
     const movieCheckbox = document.querySelector(
-      'input[value="1"][wire\\:model\\.live="categories"]'
+      'input[value="1"][wire\\:model\\.live="categoryIds"]'
     );
 
     if (type === "tv") {
