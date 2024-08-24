@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name         Enlarge-Posters
-// @version      0.2
+// @version      0.3
 // @description  Enlarge TMDB posters on hover.
 // @namespace    https://github.com/frenchcutgreenbean/UNIT3D-IS-COOL/
 // @author       dantayy
-// @match        *://*/torrents?view*
+// @match        *://*/torrents*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=unit3d.dev
 // @updateURL    https://github.com/frenchcutgreenbean/UNIT3D-IS-COOL/raw/main/enlarge-posters.user.js
 // @downloadURL  https://github.com/frenchcutgreenbean/UNIT3D-IS-COOL/raw/main/enlarge-posters.user.js
@@ -14,8 +14,7 @@
 /*jshint esversion: 6 */
 (function () {
   "use strict";
-  const current_url = window.location.href;
-  const isList = current_url.includes("torrents?view");
+  const isList = document.querySelectorAll(".torrent-search__component");
   if (isList) {
     let enlargedPoster = document.createElement("div");
     enlargedPoster.id = "enlargedPoster";
