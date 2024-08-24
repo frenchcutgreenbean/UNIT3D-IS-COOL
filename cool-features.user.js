@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Cool-UNIT3D-Features
-// @version      0.6
+// @version      0.7
 // @description  Adds quality of life features to UNIT3D trackers
 // @match        https://blutopia.cc/*
 // @match        https://aither.cc/*
@@ -25,7 +25,7 @@
   const current_url = window.location.href;
   const isRequests = current_url.includes("requests");
   const isCreateReq = current_url.includes("requests/create");
-  const isList = document.querySelectorAll(".torrent-search__component");
+  const isList = current_url.includes("torrents?");
   // GM_config stuff
   const fields = {
     auto_fill_ids: {
