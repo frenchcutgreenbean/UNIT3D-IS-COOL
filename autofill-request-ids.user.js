@@ -2,7 +2,7 @@
 // @name         Autofill-Request-ids
 // @version      0.2
 // @description  Ability to fetch meta ids on the request page.
-// @match        *://*/requests/create
+// @match        *://*/requests/create*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=unit3d.dev
 // @updateURL    https://github.com/frenchcutgreenbean/UNIT3D-IS-COOL/raw/main/autofill-request-ids.user.js
 // @downloadURL  https://github.com/frenchcutgreenbean/UNIT3D-IS-COOL/raw/main/autofill-request-ids.user.js
