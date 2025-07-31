@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Add-Letterboxd-Ratings
-// @version      0.2
+// @version      0.3
 // @description  Add Letterboxd Ratings to the torrent page.
 // @match        *://*/torrents/*
 // @match        *://*/requests/*
@@ -33,26 +33,26 @@
 
   function getElementByInnerText(tag, text) {
     return Array.from(document.querySelectorAll(tag)).find(
-      (el) => el.innerText.trim() === text
+      (el) => el.innerText.trim().toLowerCase() === text
     );
   }
 
   function injectLetterboxd(url, lbRating, lbCount) {
     if (!lbCount || !lbRating) return;
-    const ratingHeader = getElementByInnerText("h2", "Rating");
-    if (!ratingHeader) return;
+    const extraHeader = getElementByInnerText("h2", "extra information");
+    if (!extraHeader) return;
 
     const ratingFloat = parseFloat(lbRating);
 
     // Dynamic shadow color based on ratings.
     const shadowColor =
       ratingFloat < 2.5
-        ? "rgba(212, 36, 36, 0.8)"
+        ? "rgba(212, 36, 36, 0.8)" // Red for ratings below 2.5
         : ratingFloat < 3.5
-        ? "rgba(212, 195, 36, 0.8)"
-        : ratingFloat < 4.5
-        ? "rgba(0,224,84, 0.8)"
-        : "rgba(113, 251, 255, 0.8)";
+          ? "rgba(212, 195, 36, 0.8)" // Yellow for ratings 2.5 and above
+          : ratingFloat < 4.5
+            ? "rgba(0,224,84, 0.8)" // Green for ratings 3.5 and above
+            : "rgba(113, 251, 255, 0.8)"; // Light blue for ratings 4.5 and above
 
     const lbLogo = "https://i.ibb.co/ygXMwn5/letterboxd-mac-icon.png";
     const lbIcon = document.createElement("img");
@@ -72,7 +72,7 @@
         filter: drop-shadow(0 0 0.4rem ${shadowColor});
     }`;
 
-    const articleElement = ratingHeader.closest("section");
+    const articleElement = extraHeader.closest("section");
     const ratingName = document.createElement("h2");
     const ratingValue = document.createElement("h3");
     const meta_id_tag = document.createElement("a");
