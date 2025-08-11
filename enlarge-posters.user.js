@@ -4,7 +4,7 @@
 // @description  Enlarge TMDB posters on hover.
 // @namespace    https://github.com/frenchcutgreenbean/UNIT3D-IS-COOL/
 // @author       dantayy
-// @match        *://*/torrents?*
+// @match        *://*/torrents*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=unit3d.dev
 // @updateURL    https://github.com/frenchcutgreenbean/UNIT3D-IS-COOL/raw/main/enlarge-posters.user.js
 // @downloadURL  https://github.com/frenchcutgreenbean/UNIT3D-IS-COOL/raw/main/enlarge-posters.user.js
