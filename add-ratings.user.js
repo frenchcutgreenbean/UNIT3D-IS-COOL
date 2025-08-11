@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Add-Meta-Ratings
-// @version      0.1
+// @version      0.2
 // @description  Add Ratings from various meta providers to the torrent page.
 // @match        *://*/torrents/*
 // @match        *://*/requests/*
@@ -8,8 +8,8 @@
 // @namespace    https://github.com/frenchcutgreenbean/UNIT3D-IS-COOL/
 // @author       dantayy
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=unit3d.dev
-// @updateURL    https://github.com/frenchcutgreenbean/UNIT3D-IS-COOL/raw/main/add-letterboxd-ratings.user.js
-// @downloadURL  https://github.com/frenchcutgreenbean/UNIT3D-IS-COOL/raw/main/add-letterboxd-ratings.user.js
+// @updateURL    https://github.com/frenchcutgreenbean/UNIT3D-IS-COOL/raw/main/add-ratings.user.js
+// @downloadURL  https://github.com/frenchcutgreenbean/UNIT3D-IS-COOL/raw/main/add-ratings.user.js
 // @grant        GM.xmlHttpRequest
 // ==/UserScript==
 
@@ -49,9 +49,9 @@
         ? "rgba(212, 36, 36, 0.8)" // Red for ratings below 2.5
         : ratingFloat < 3.5
           ? "rgba(212, 195, 36, 0.8)" // Yellow for ratings 2.5 and above
-          : ratingFloat < 4.5
+          : ratingFloat < 4.2
             ? "rgba(0,224,84, 0.8)" // Green for ratings 3.5 and above
-            : "rgba(113, 251, 255, 0.8)"; // Light blue for ratings 4.5 and above
+            : "rgba(113, 251, 255, 0.8)"; // Light blue for ratings 4.2 and above
 
     const img = document.createElement("img");
     img.className = `${siteName.toLowerCase()}-chip__icon`;
