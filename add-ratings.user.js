@@ -1,15 +1,15 @@
 // ==UserScript==
 // @name         Add-Meta-Ratings
-// @version      0.1
+// @version      0.4
 // @description  Add Ratings from various meta providers to the torrent page.
 // @match        *://*/torrents/*
 // @match        *://*/requests/*
 // @match        *://*/torrents/similar/*
-// @namespace    https://github.com/frenchcutgreenbean/UNIT3D-IS-COOL/
+// @namespace    https://github.com/YevgenyPavlovich/UNIT3D-IS-COOL/
 // @author       dantayy
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=unit3d.dev
-// @updateURL    https://github.com/frenchcutgreenbean/UNIT3D-IS-COOL/raw/main/add-letterboxd-ratings.user.js
-// @downloadURL  https://github.com/frenchcutgreenbean/UNIT3D-IS-COOL/raw/main/add-letterboxd-ratings.user.js
+// @updateURL    https://github.com/YevgenyPavlovich/UNIT3D-IS-COOL/raw/main/add-ratings.user.js
+// @downloadURL  https://github.com/YevgenyPavlovich/UNIT3D-IS-COOL/raw/main/add-ratings.user.js
 // @grant        GM.xmlHttpRequest
 // ==/UserScript==
 
