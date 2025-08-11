@@ -67,7 +67,7 @@
         color: var(--meta-chip-icon-fg);
         width: 40px;
         height: 40px;
-        border-radius: 50%;
+        border-radius: 4%;
         filter: drop-shadow(0 0 0.4rem ${shadowColor});
     }`;
     const articleElement = extraHeader.closest("section");
