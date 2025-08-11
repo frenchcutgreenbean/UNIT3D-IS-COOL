@@ -42,7 +42,7 @@
     if (!rating) return;
     const extraHeader = getElementByInnerText("h2", "extra information");
     if (!extraHeader) return;
-    const ratingFloat = parseFloat(rating);
+    let ratingFloat = parseFloat(rating);
     if (siteName === "IMDb") ratingFloat = ratingFloat / 2; // IMDb ratings are out of 10, adjust to match other ratings
     const shadowColor =
       ratingFloat < 2.5
@@ -53,7 +53,6 @@
             ? "rgba(0,224,84, 0.8)" // Green for ratings 3.5 and above
             : "rgba(113, 251, 255, 0.8)"; // Light blue for ratings 4.5 and above
 
-    const logoLink = logo;
     const img = document.createElement("img");
     img.className = `${siteName.toLowerCase()}-chip__icon`;
     img.src = logoLink;
