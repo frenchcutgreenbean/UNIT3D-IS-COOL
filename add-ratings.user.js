@@ -55,7 +55,7 @@
 
     const img = document.createElement("img");
     img.className = `${siteName.toLowerCase()}-chip__icon`;
-    img.src = logoLink;
+    img.src = logo;
 
     const iconStyle = `
     .${siteName.toLowerCase()}-chip__icon{
