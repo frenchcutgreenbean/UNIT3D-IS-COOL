@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Autofill-Request-ids
-// @version      0.3
+// @version      0.4
 // @description  Ability to fetch meta ids on the request page.
 // @match        *://*/torrents/create*
 // @match        *://*/upload/create*
@@ -84,11 +84,21 @@
             }
           }
         }
+      } else {
+        alert("No results found on TMDB. Please check the title and try again.");
       }
 
-      // Safely set the IDs in the form fields if they exist
-      const tmdbElement = document.getElementById("autotmdb");
-      if (tmdbElement) tmdbElement.value = tmdb_id || 0;
+      // All possible ids for the tmdb id input elements
+      const tmdbSelectors = ["tmdb_tv_id", "auto_tmdb_movie", "auto_tmdb_tv", "tmdb_movie_id"];
+      let tmdbElement = null;
+      for (const s of tmdbSelectors) {
+        const element = document.getElementById(s);
+        if (element) {
+          // Safely set the IDs in the form fields if they exist
+          tmdbElement = element;
+          if (tmdbElement) tmdbElement.value = tmdb_id || 0;
+        }
+      }
 
       const imdbElement = document.getElementById("autoimdb");
       if (imdbElement) imdbElement.value = imdb_id || 0;
@@ -104,7 +114,7 @@
       if (keywordsElement) keywordsElement.value = keywords.join(', ');
 
       // Generate and insert the external resource URLs
-      insertExternalLinks(tmdb_id, imdb_id, tvdb_id, mal_id, type);
+      insertExternalLinks(tmdb_id, imdb_id, tvdb_id, mal_id, type, title);
 
     } catch (error) {
       console.error("Error fetching data:", error.message);
@@ -136,12 +146,13 @@
     return genreMap[genreId] || "Unknown";
   }
 
-  function insertExternalLinks(tmdb_id, imdb_id, tvdb_id, mal_id, type) {
+  function insertExternalLinks(tmdb_id, imdb_id, tvdb_id, mal_id, type, title) {
     const panelBody = document.querySelector("aside .panelV2 .panel__body");
     if (panelBody) {
       const externalLinksContainer = document.createElement("div");
       externalLinksContainer.className = "external-links-container";
-
+      const displayTitle = typeof title === 'string' ? title : (title && title.value) ? title.value : '';
+      externalLinksContainer.innerHTML = `<strong>External Links: ${displayTitle} </strong><br>`;
       if (tmdb_id) {
         externalLinksContainer.innerHTML += `<a href="https://www.themoviedb.org/${type}/${tmdb_id}" target="_blank"><img src="https://www.google.com/s2/favicons?sz=64&domain=themoviedb.org" alt="TMDB" style="width:16px; vertical-align:middle; margin-right:5px;"> TMDB</a><br>`;
       }
@@ -220,7 +231,6 @@
   form.prepend(fetch_container);
 
   const year_re = /\b\d{4}\b/;
-  const res_re = /\b\d*[p|i]\b/;
 
   function on_fetch_click(e) {
     e.preventDefault();
@@ -248,15 +258,13 @@
     let type = cat === "2" ? "tv" : "movie";
 
     // Extract year if present
-    let year = year_re.exec(title);
-    let res = res_re.exec(title);
+    let year = title.match(year_re);
+    year = year ? year.at(-1) : "";
 
-    // Remove year and resolution from the title if they are present
-    title = year ? title.replace(year_re, "").trim() : title;
-    title = res ? title.replace(res_re, "").trim() : title;
+    title = year ? title.split(year)[0].trim() : title.trim();
 
     // Construct the URL for the TMDB API search
-    let year_url = year ? `&year=${year[0]}` : "";
+    let year_url = year ? `&year=${year}` : "";
     let url = `https://api.themoviedb.org/3/search/${type}?api_key=${tmdb_key}&language=en-US&query=${encodeURIComponent(title)}&page=1&include_adult=false${year_url}`;
 
     // Fetch the IDs and populate the form
