@@ -335,15 +335,14 @@
         fetch_button.disabled = false;
       }
 
-      // All possible ids for the tmdb id input elements
-      const tmdbSelectors = ["tmdb_tv_id", "auto_tmdb_movie", "auto_tmdb_tv", "tmdb_movie_id"];
-      let tmdbElement = null;
-      for (const s of tmdbSelectors) {
-        const element = document.getElementById(s);
-        if (element) {
-          tmdbElement = element;
-          if (tmdbElement) tmdbElement.value = tmdb_id || 0;
-        }
+      // Set the correct TMDB ID field based on media type
+      const tmdbFieldId = type === "movie" ? "tmdb_movie_id" : "tmdb_tv_id";
+      const tmdbElement = document.getElementById(tmdbFieldId);
+      if (tmdbElement) {
+        tmdbElement.value = tmdb_id || 0;
+        ['input', 'change', 'blur'].forEach(eventType => {
+          tmdbElement.dispatchEvent(new Event(eventType, { bubbles: true }));
+        });
       }
 
       const imdbElement = document.getElementById("autoimdb");
@@ -596,7 +595,7 @@
     fetch_info.textContent = "⚠️ TMDB API key required for fetching. Add your API key to the script.";
     fetch_button.disabled = true;
   } else {
-    fetch_info.textContent = "Add a title (Title + Year). Select a category and then click fetch.";
+    fetch_info.textContent = "Enter title. Use Parse to auto-fill fields, or Parse & Fetch to auto-fill + get IDs.";
   }
 
   fetch_info.id = "fetch-info";
@@ -662,9 +661,6 @@
   }
 
   form.prepend(fetch_container);
-
-
-
 
 
   // Parse button click handler
